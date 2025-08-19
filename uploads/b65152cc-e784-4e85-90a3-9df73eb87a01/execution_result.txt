@@ -1,0 +1,315 @@
+
+[2025-08-19 00:55:43]
+✅ pandas already installed.
+----------------------------------------
+
+[2025-08-19 00:55:43]
+📜 Executing Code:
+import pandas as pd
+
+df = pd.read_csv("uploads/b65152cc-e784-4e85-90a3-9df73eb87a01/sample-weather.csv")
+preview = df.head(3).to_string()
+
+with open("uploads/b65152cc-e784-4e85-90a3-9df73eb87a01/metadata.txt", "a") as f:
+    f.write("CSV Preview:\n")
+    f.write(preview + "\n")
+
+----------------------------------------
+
+[2025-08-19 00:55:43]
+✅ Code executed successfully:
+
+----------------------------------------
+
+[2025-08-19 00:55:55]
+✅ pandas already installed.
+----------------------------------------
+
+[2025-08-19 00:55:55]
+✅ matplotlib already installed.
+----------------------------------------
+
+[2025-08-19 00:55:55]
+📜 Executing Code:
+import pandas as pd
+import matplotlib.pyplot as plt
+import base64
+from io import BytesIO
+import json
+
+# Load the dataset
+df = pd.read_csv("uploads/b65152cc-e784-4e85-90a3-9df73eb87a01/sample-weather.csv")
+df["date"] = pd.to_datetime(df["date"])
+
+# 1. Average temperature
+average_temp_c = df["temperature_c"].mean()
+
+# 2. Date with highest precipitation
+max_precip_date = df.loc[df["precip_mm"].idxmax()]["date"].strftime("%Y-%m-%d")
+
+# 3. Minimum temperature
+min_temp_c = df["temperature_c"].min()
+
+# 4. Correlation between temperature and precipitation
+temp_precip_correlation = df["temperature_c"].corr(df["precip_mm"])
+
+# 5. Average precipitation
+average_precip_mm = df["precip_mm"].mean()
+
+# 6. Temperature line chart
+plt.figure()
+df.plot(x="date", y="temperature_c", kind="line", color="red", legend=False)
+plt.title("Temperature Over Time")
+plt.xlabel("Date")
+plt.ylabel("Temperature (°C)")
+plt.grid(True)
+plt.tight_layout()
+buf = BytesIO()
+plt.savefig(buf, format="png")
+buf.seek(0)
+temp_line_chart_b64 = base64.b64encode(buf.getvalue()).decode("utf-8")
+plt.close()
+
+# 7. Precipitation histogram
+plt.figure()
+df["precip_mm"].plot(kind="hist", color="orange", bins=10)
+plt.title("Precipitation Distribution")
+plt.xlabel("Precipitation (mm)")
+plt.ylabel("Frequency")
+plt.grid(True)
+plt.tight_layout()
+buf = BytesIO()
+plt.savefig(buf, format="png")
+buf.seek(0)
+precip_histogram_b64 = base64.b64encode(buf.getvalue()).decode("utf-8")
+plt.close()
+
+# Construct the final JSON object
+result = {
+    "average_temp_c": average_temp_c,
+    "max_precip_date": max_precip_date,
+    "min_temp_c": min_temp_c,
+    "temp_precip_correlation": temp_precip_correlation,
+    "average_precip_mm": average_precip_mm,
+    "temp_line_chart": temp_line_chart_b64,
+    "precip_histogram": precip_histogram_b64,
+}
+
+# Save the result to a JSON file
+with open("uploads/b65152cc-e784-4e85-90a3-9df73eb87a01/result.json", "w") as f:
+    json.dump(result, f, indent=4)
+
+----------------------------------------
+
+[2025-08-19 00:55:56]
+❌ Execution error:
+Traceback (most recent call last):
+  File "/home/vaibhav999/TDS_project2/uploads/b65152cc-e784-4e85-90a3-9df73eb87a01/job_/script.py", line 67, in <module>
+    json.dump(result, f, indent=4)
+  File "/usr/lib/python3.10/json/__init__.py", line 179, in dump
+    for chunk in iterable:
+  File "/usr/lib/python3.10/json/encoder.py", line 431, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "/usr/lib/python3.10/json/encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "/usr/lib/python3.10/json/encoder.py", line 438, in _iterencode
+    o = _default(o)
+  File "/usr/lib/python3.10/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type int64 is not JSON serializable
+
+----------------------------------------
+
+[2025-08-19 00:56:05]
+✅ pandas already installed.
+----------------------------------------
+
+[2025-08-19 00:56:05]
+✅ matplotlib already installed.
+----------------------------------------
+
+[2025-08-19 00:56:06]
+📜 Executing Code:
+import pandas as pd
+import matplotlib.pyplot as plt
+import base64
+from io import BytesIO
+import json
+
+# Load the dataset
+df = pd.read_csv("uploads/b65152cc-e784-4e85-90a3-9df73eb87a01/sample-weather.csv")
+df["date"] = pd.to_datetime(df["date"])
+
+# 1. Average temperature
+average_temp_c = df["temperature_c"].mean()
+
+# 2. Date with highest precipitation
+max_precip_date = df.loc[df["precip_mm"].idxmax()]["date"].strftime("%Y-%m-%d")
+
+# 3. Minimum temperature
+min_temp_c = df["temperature_c"].min()
+
+# 4. Correlation between temperature and precipitation
+temp_precip_correlation = df["temperature_c"].corr(df["precip_mm"])
+
+# 5. Average precipitation
+average_precip_mm = df["precip_mm"].mean()
+
+# 6. Temperature line chart
+plt.figure()
+df.plot(x="date", y="temperature_c", kind="line", color="red", legend=False)
+plt.title("Temperature Over Time")
+plt.xlabel("Date")
+plt.ylabel("Temperature (°C)")
+plt.grid(True)
+plt.tight_layout()
+buf = BytesIO()
+plt.savefig(buf, format="png")
+buf.seek(0)
+temp_line_chart_b64 = base64.b64encode(buf.getvalue()).decode("utf-8")
+plt.close()
+
+# 7. Precipitation histogram
+plt.figure()
+df["precip_mm"].plot(kind="hist", color="orange", bins=10)
+plt.title("Precipitation Distribution")
+plt.xlabel("Precipitation (mm)")
+plt.ylabel("Frequency")
+plt.grid(True)
+plt.tight_layout()
+buf = BytesIO()
+plt.savefig(buf, format="png")
+buf.seek(0)
+precip_histogram_b64 = base64.b64encode(buf.getvalue()).decode("utf-8")
+plt.close()
+
+# Construct the final JSON object
+result = {
+    "average_temp_c": average_temp_c,
+    "max_precip_date": max_precip_date,
+    "min_temp_c": min_temp_c,
+    "temp_precip_correlation": temp_precip_correlation,
+    "average_precip_mm": average_precip_mm,
+    "temp_line_chart": temp_line_chart_b64,
+    "precip_histogram": precip_histogram_b64,
+}
+
+# Save the result to a JSON file
+with open("uploads/b65152cc-e784-4e85-90a3-9df73eb87a01/result.json", "w") as f:
+    json.dump(result, f, indent=4)
+
+----------------------------------------
+
+[2025-08-19 00:56:06]
+❌ Execution error:
+Traceback (most recent call last):
+  File "/home/vaibhav999/TDS_project2/uploads/b65152cc-e784-4e85-90a3-9df73eb87a01/job_/script.py", line 67, in <module>
+    json.dump(result, f, indent=4)
+  File "/usr/lib/python3.10/json/__init__.py", line 179, in dump
+    for chunk in iterable:
+  File "/usr/lib/python3.10/json/encoder.py", line 431, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "/usr/lib/python3.10/json/encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "/usr/lib/python3.10/json/encoder.py", line 438, in _iterencode
+    o = _default(o)
+  File "/usr/lib/python3.10/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type int64 is not JSON serializable
+
+----------------------------------------
+
+[2025-08-19 00:56:18]
+✅ pandas already installed.
+----------------------------------------
+
+[2025-08-19 00:56:18]
+✅ matplotlib already installed.
+----------------------------------------
+
+[2025-08-19 00:56:18]
+📜 Executing Code:
+import pandas as pd
+import matplotlib.pyplot as plt
+import base64
+from io import BytesIO
+import json
+
+# Load the dataset
+df = pd.read_csv("uploads/b65152cc-e784-4e85-90a3-9df73eb87a01/sample-weather.csv")
+df["date"] = pd.to_datetime(df["date"])
+
+# 1. Average temperature
+average_temp_c = df["temperature_c"].mean()
+
+# 2. Date with highest precipitation
+max_precip_date = df.loc[df["precip_mm"].idxmax()]["date"].strftime("%Y-%m-%d")
+
+# 3. Minimum temperature
+min_temp_c = df["temperature_c"].min()
+
+# 4. Correlation between temperature and precipitation
+temp_precip_correlation = df["temperature_c"].corr(df["precip_mm"])
+
+# 5. Average precipitation
+average_precip_mm = df["precip_mm"].mean()
+
+# 6. Temperature line chart
+plt.figure(figsize=(8, 4))
+df.plot(x="date", y="temperature_c", kind="line", color="red", legend=False)
+plt.title("Temperature Over Time")
+plt.xlabel("Date")
+plt.ylabel("Temperature (°C)")
+plt.grid(True)
+plt.tight_layout()
+buf = BytesIO()
+plt.savefig(buf, format="png")
+buf.seek(0)
+temp_line_chart_b64 = base64.b64encode(buf.getvalue()).decode("utf-8")
+plt.close()
+
+# 7. Precipitation histogram
+plt.figure(figsize=(8, 4))
+df["precip_mm"].plot(kind="hist", color="orange", bins=10)
+plt.title("Precipitation Distribution")
+plt.xlabel("Precipitation (mm)")
+plt.ylabel("Frequency")
+plt.grid(True)
+plt.tight_layout()
+buf = BytesIO()
+plt.savefig(buf, format="png")
+buf.seek(0)
+precip_histogram_b64 = base64.b64encode(buf.getvalue()).decode("utf-8")
+plt.close()
+
+# Construct the final JSON object
+result = {
+    "average_temp_c": average_temp_c,
+    "max_precip_date": max_precip_date,
+    "min_temp_c": float(min_temp_c),
+    "temp_precip_correlation": temp_precip_correlation,
+    "average_precip_mm": average_precip_mm,
+    "temp_line_chart": temp_line_chart_b64,
+    "precip_histogram": precip_histogram_b64,
+}
+
+# Save the result to a JSON file
+with open("uploads/b65152cc-e784-4e85-90a3-9df73eb87a01/result.json", "w") as f:
+    json.dump(result, f, indent=4)
+
+----------------------------------------
+
+[2025-08-19 00:56:19]
+✅ Code executed successfully:
+
+----------------------------------------
+
+[2025-08-19 00:56:26]
+📜 Executing Code:
+
+----------------------------------------
+
+[2025-08-19 00:56:26]
+✅ Code executed successfully:
+
+----------------------------------------

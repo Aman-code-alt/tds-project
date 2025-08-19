@@ -1,0 +1,13 @@
+Error processing image with pytesseract: [Errno 2] No such file or directory: 'uploads/2be4baa2-f361-4879-8eda-05d89ac395dd/sales_chart.png'. Make sure Tesseract is installed and configured correctly.
+File not found at path: uploads/2be4baa2-f361-4879-8eda-05d89ac395dd/sales_chart.png. Please ensure the image is uploaded correctly.
+File not found at path: uploads/2be4baa2-f361-4879-8eda-05d89ac395dd/sales_chart.png. Please ensure the image is uploaded correctly.
+
+--- ANALYSIS RESTART ---
+ERROR: Could not find or access the image file. Proceeding with placeholder data.
+Placeholder Data Head:
+  Salesperson  Sales Amount  Sales Volume
+0       Alice           600            55
+1         Bob           450            42
+2     Charlie           720            68
+3       Diana           380            35
+4         Eve           550            51

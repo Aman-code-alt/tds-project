@@ -1,0 +1,9 @@
+  source target
+0  Alice    Bob
+1  Alice  Carol
+2    Bob  Carol
+Edge Count: 7
+Highest Degree Node: Bob
+Average Degree: 2.8000
+Density: 0.7000
+Shortest Path (Alice to Eve): 2

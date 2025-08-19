@@ -1,0 +1,144 @@
+
+[2025-08-19 00:54:42]
+✅ pandas already installed.
+----------------------------------------
+
+[2025-08-19 00:54:42]
+📜 Executing Code:
+import pandas as pd
+
+df = pd.read_csv("uploads/08fe9920-4753-4f24-b6bd-cacf9dceebc3/sample-sales.csv")
+preview = df.head(3).to_string()
+
+with open("uploads/08fe9920-4753-4f24-b6bd-cacf9dceebc3/metadata.txt", "a") as f:
+    f.write("CSV Preview:\n")
+    f.write(preview)
+    f.write("\n\n")
+
+print("Preview saved to metadata.txt")
+
+----------------------------------------
+
+[2025-08-19 00:54:42]
+✅ Code executed successfully:
+Preview saved to metadata.txt
+
+----------------------------------------
+
+[2025-08-19 00:55:06]
+✅ pandas already installed.
+----------------------------------------
+
+[2025-08-19 00:55:06]
+✅ matplotlib already installed.
+----------------------------------------
+
+[2025-08-19 00:55:06]
+📜 Executing Code:
+import pandas as pd
+import matplotlib.pyplot as plt
+import base64
+from io import BytesIO
+import json
+
+# Load the dataset
+df = pd.read_csv("uploads/08fe9920-4753-4f24-b6bd-cacf9dceebc3/sample-sales.csv")
+
+# --- Data Preparation ---
+df["date"] = pd.to_datetime(df["date"])
+df["day"] = df["date"].dt.day
+
+# --- Calculations ---
+# 1. Total sales
+total_sales = df["sales"].sum()
+
+# 2. Top region
+top_region = df.groupby("region")["sales"].sum().idxmax()
+
+# 3. Correlation between day and sales
+day_sales_correlation = df["day"].corr(df["sales"])
+
+# 5. Median sales
+median_sales = df["sales"].median()
+
+# 6. Total sales tax (10%)
+total_sales_tax = total_sales * 0.10
+
+
+# --- Visualizations ---
+def fig_to_base64(fig):
+    img = BytesIO()
+    fig.savefig(img, format="png", bbox_inches="tight")
+    img.seek(0)
+    return base64.b64encode(img.getvalue()).decode("utf-8")
+
+
+# 4. Bar chart of total sales by region
+plt.figure(figsize=(8, 5))
+sales_by_region = df.groupby("region")["sales"].sum()
+sales_by_region.plot(kind="bar", color="blue")
+plt.title("Total Sales by Region")
+plt.ylabel("Total Sales")
+plt.xlabel("Region")
+plt.xticks(rotation=0)
+plt.grid(axis="y", linestyle="--", alpha=0.7)
+plt.tight_layout()
+bar_chart_base64 = fig_to_base64(plt.gcf())
+plt.close()
+
+# 7. Cumulative sales over time
+plt.figure(figsize=(10, 5))
+df_sorted = df.sort_values("date")
+df_sorted["cumulative_sales"] = df_sorted["sales"].cumsum()
+plt.plot(
+    df_sorted["date"],
+    df_sorted["cumulative_sales"],
+    color="red",
+    marker="o",
+    linestyle="-",
+)
+plt.title("Cumulative Sales Over Time")
+plt.xlabel("Date")
+plt.ylabel("Cumulative Sales")
+plt.xticks(rotation=45)
+plt.grid(True, linestyle="--", alpha=0.6)
+plt.tight_layout()
+cumulative_chart_base64 = fig_to_base64(plt.gcf())
+plt.close()
+
+# --- Assemble JSON Output ---
+result = {
+    "total_sales": int(total_sales),
+    "top_region": top_region,
+    "day_sales_correlation": day_sales_correlation,
+    "bar_chart": bar_chart_base64,
+    "median_sales": float(median_sales),
+    "total_sales_tax": total_sales_tax,
+    "cumulative_sales_chart": cumulative_chart_base64,
+}
+
+# Save the result to a JSON file
+with open("uploads/08fe9920-4753-4f24-b6bd-cacf9dceebc3/result.json", "w") as f:
+    json.dump(result, f)
+
+print(
+    "Analysis complete. Results saved to uploads/08fe9920-4753-4f24-b6bd-cacf9dceebc3/result.json"
+)
+
+----------------------------------------
+
+[2025-08-19 00:55:06]
+✅ Code executed successfully:
+Analysis complete. Results saved to uploads/08fe9920-4753-4f24-b6bd-cacf9dceebc3/result.json
+
+----------------------------------------
+
+[2025-08-19 00:55:17]
+📜 Executing Code:
+
+----------------------------------------
+
+[2025-08-19 00:55:17]
+✅ Code executed successfully:
+
+----------------------------------------

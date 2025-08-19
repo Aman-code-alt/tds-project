@@ -1,0 +1,27 @@
+2025-08-19 00:55:23,498 [INFO] Step-1: Folder created: uploads/b65152cc-e784-4e85-90a3-9df73eb87a01
+2025-08-19 00:55:23,502 [INFO] Using Python executable: venv/bin/python3
+2025-08-19 00:55:23,502 [INFO] Step-2: File sent {'questions.txt': 'uploads/b65152cc-e784-4e85-90a3-9df73eb87a01/question.txt', 'sample-weather.csv': 'uploads/b65152cc-e784-4e85-90a3-9df73eb87a01/sample-weather.csv'}
+2025-08-19 00:55:23,502 [INFO] 🤖 Step-1: Getting scrap code and metadata from llm. Tries count = 0
+2025-08-19 00:55:43,237 [INFO] 🤖 Step-1: Successfully parsed response from LLM.
+2025-08-19 00:55:43,238 [INFO] 💻 Step-3: Entering loop
+2025-08-19 00:55:43,238 [INFO] 💻 Loop-1: Running LLM code.
+2025-08-19 00:55:43,607 [INFO] ✅💻 Loop-1: Code executed successfully.
+2025-08-19 00:55:43,607 [INFO] 🤖 Loop-1: Inside Loop LLM call.
+2025-08-19 00:55:55,880 [INFO] 💻 Loop-2: Running LLM code.
+2025-08-19 00:55:56,895 [ERROR] ❌💻 Loop-2: Code execution failed: ❌ Execution error: Traceback (most recent call last): File "/home/vaibhav999/TDS_project2/uploads/b65152cc-e784-4e85-90a3-9df73eb87a01/job_/script.py", line 67, in <module> json.dump(result, f, indent=4) File "/usr/lib/python3.10/json/__init__.py", line 179, in dump for chunk in iterable: File "/usr/lib/python3.10/json/encoder.py", line 431, in _iterencode yield from _iterencode_dict(o, _current_indent_level) File "/usr/lib/python3.10/json/encoder.py", line 405, in _iterencode_dict yield from chunks File "/usr/lib/python3.10/json/encoder.py", line 438, in _iterencode o = _default(o) File "/usr/lib/python3.10/json/encoder.py", line 179, in default raise TypeError(f'Object of type {o.__class__.__name__} ' TypeError: Object of type int64 is not JSON serializable
+2025-08-19 00:55:56,895 [INFO] ✅📁 Loop-2: Found result files.
+2025-08-19 00:55:56,895 [INFO] 🤖 Loop-2: Checking result validity.
+2025-08-19 00:56:05,958 [INFO] 💻 Loop-2: Re-running code as per validation result.
+2025-08-19 00:56:05,958 [INFO] 💻 Loop-3: Running LLM code.
+2025-08-19 00:56:06,858 [ERROR] ❌💻 Loop-3: Code execution failed: ❌ Execution error: Traceback (most recent call last): File "/home/vaibhav999/TDS_project2/uploads/b65152cc-e784-4e85-90a3-9df73eb87a01/job_/script.py", line 67, in <module> json.dump(result, f, indent=4) File "/usr/lib/python3.10/json/__init__.py", line 179, in dump for chunk in iterable: File "/usr/lib/python3.10/json/encoder.py", line 431, in _iterencode yield from _iterencode_dict(o, _current_indent_level) File "/usr/lib/python3.10/json/encoder.py", line 405, in _iterencode_dict yield from chunks File "/usr/lib/python3.10/json/encoder.py", line 438, in _iterencode o = _default(o) File "/usr/lib/python3.10/json/encoder.py", line 179, in default raise TypeError(f'Object of type {o.__class__.__name__} ' TypeError: Object of type int64 is not JSON serializable
+2025-08-19 00:56:06,858 [INFO] ✅📁 Loop-3: Found result files.
+2025-08-19 00:56:06,858 [INFO] 🤖 Loop-3: Checking result validity.
+2025-08-19 00:56:18,599 [INFO] 💻 Loop-3: Re-running code as per validation result.
+2025-08-19 00:56:18,600 [INFO] 💻 Loop-4: Running LLM code.
+2025-08-19 00:56:19,569 [INFO] ✅💻 Loop-4: Code executed successfully.
+2025-08-19 00:56:19,569 [INFO] ✅📁 Loop-4: Found result files.
+2025-08-19 00:56:19,569 [INFO] 🤖 Loop-4: Checking result validity.
+2025-08-19 00:56:26,402 [INFO] ✅ Loop-4: Validation successful, no re-run needed.
+2025-08-19 00:56:26,402 [INFO] 💻 Step-6: Running final code.
+2025-08-19 00:56:26,419 [INFO] 📁 Step-7: Reading result.json
+2025-08-19 00:56:26,419 [INFO] ✅📁 Step-7: send result back

@@ -1,0 +1,147 @@
+
+[2025-08-19 00:56:42]
+✅ pandas already installed.
+----------------------------------------
+
+[2025-08-19 00:56:42]
+📜 Executing Code:
+import pandas as pd
+
+df = pd.read_csv("uploads/07f7dd26-a7d7-4d0c-8f5a-782f59daba2c/edges.csv")
+preview = df.head(3).to_string()
+
+with open("uploads/07f7dd26-a7d7-4d0c-8f5a-782f59daba2c/metadata.txt", "w") as f:
+    f.write(preview)
+
+----------------------------------------
+
+[2025-08-19 00:56:43]
+✅ Code executed successfully:
+
+----------------------------------------
+
+[2025-08-19 00:56:59]
+✅ pandas already installed.
+----------------------------------------
+
+[2025-08-19 00:56:59]
+📦 Installing networkx ...
+----------------------------------------
+
+[2025-08-19 00:57:01]
+✅ matplotlib already installed.
+----------------------------------------
+
+[2025-08-19 00:57:01]
+📜 Executing Code:
+import pandas as pd
+import networkx as nx
+import matplotlib.pyplot as plt
+import base64
+from io import BytesIO
+import json
+import collections
+
+# Load the dataset
+df = pd.read_csv("uploads/07f7dd26-a7d7-4d0c-8f5a-782f59daba2c/edges.csv")
+
+# Create a graph from the dataframe
+G = nx.from_pandas_edgelist(df, "source", "target")
+
+# 1. How many edges are in the network?
+edge_count = G.number_of_edges()
+
+# 2. Which node has the highest degree?
+degrees = dict(G.degree())
+highest_degree_node = max(degrees, key=degrees.get)
+
+# 3. What is the average degree of the network?
+num_nodes = G.number_of_nodes()
+average_degree = sum(degrees.values()) / num_nodes if num_nodes > 0 else 0
+
+# 4. What is the network density?
+density = nx.density(G)
+
+# 5. What is the length of the shortest path between Alice and Eve?
+try:
+    shortest_path_alice_eve = nx.shortest_path_length(G, source="Alice", target="Eve")
+except nx.NetworkXNoPath:
+    shortest_path_alice_eve = -1  # Or some other indicator of no path
+
+# 6. Draw the network with nodes labelled and edges shown.
+plt.figure(figsize=(8, 6))
+nx.draw(
+    G,
+    with_labels=True,
+    node_color="skyblue",
+    node_size=2000,
+    edge_color="gray",
+    font_size=12,
+    font_weight="bold",
+)
+plt.title("Network Graph")
+buf = BytesIO()
+plt.savefig(buf, format="png")
+plt.close()
+buf.seek(0)
+network_graph_base64 = base64.b64encode(buf.read()).decode("utf-8")
+
+# 7. Plot the degree distribution as a bar chart with green bars.
+degree_sequence = sorted([d for n, d in G.degree()], reverse=True)
+degree_counts = collections.Counter(degree_sequence)
+deg, cnt = zip(*sorted(degree_counts.items()))
+
+plt.figure(figsize=(8, 6))
+plt.bar(deg, cnt, color="green")
+plt.title("Degree Distribution")
+plt.xlabel("Degree")
+plt.ylabel("Number of Nodes")
+plt.xticks(deg)
+buf = BytesIO()
+plt.savefig(buf, format="png")
+plt.close()
+buf.seek(0)
+degree_histogram_base64 = base64.b64encode(buf.read()).decode("utf-8")
+
+# Create the final JSON object
+result = {
+    "edge_count": edge_count,
+    "highest_degree_node": highest_degree_node,
+    "average_degree": average_degree,
+    "density": density,
+    "shortest_path_alice_eve": shortest_path_alice_eve,
+    "network_graph": network_graph_base64,
+    "degree_histogram": degree_histogram_base64,
+}
+
+# Save the result to a JSON file
+with open("uploads/07f7dd26-a7d7-4d0c-8f5a-782f59daba2c/result.json", "w") as f:
+    json.dump(result, f, indent=4)
+
+# Append metadata
+metadata = f"""
+Edge Count: {edge_count}
+Highest Degree Node: {highest_degree_node}
+Average Degree: {average_degree:.4f}
+Density: {density:.4f}
+Shortest Path (Alice to Eve): {shortest_path_alice_eve}
+"""
+with open("uploads/07f7dd26-a7d7-4d0c-8f5a-782f59daba2c/metadata.txt", "a") as f:
+    f.write(metadata)
+
+----------------------------------------
+
+[2025-08-19 00:57:02]
+✅ Code executed successfully:
+
+----------------------------------------
+
+[2025-08-19 00:57:23]
+📜 Executing Code:
+
+----------------------------------------
+
+[2025-08-19 00:57:23]
+✅ Code executed successfully:
+
+----------------------------------------
